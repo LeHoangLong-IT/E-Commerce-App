@@ -1,21 +1,39 @@
 .leftbar-wrapper {
-    background: var(--bg);
-    border-radius: 8px;
+    position: sticky;
+    top: 12px;
+
+    height: calc(100vh - 12px);
+    overflow-y: auto;
+
+    &.leftbar-wrapper::-webkit-scrollbar {
+        width: 0px;
+    }
+
 
     .title {
         font-weight: 600;
+        padding: 0 16px 8px 16px;
+        font-size: 15px;
+    }
+
+    .category {
+        padding: 12px 8px;
+        background: var(--bg);
+        border-radius: var(--card-rounded)
     }
 
     .item {
         display: flex;
         align-items: center;
         gap: 1.2rem;
-        padding: 6px 0;
+        padding: 7px 0;
         cursor: pointer;
+        transition: .2s ease-out;
+        border-radius: 7px;
 
 
         &:hover {
-        background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.15);
         }
 
 
@@ -24,4 +42,8 @@
             height: 32px;
         }
     }
+}
+
+.category+.category {
+    margin-top: 2rem;
 }

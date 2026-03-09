@@ -28,7 +28,7 @@ const HeaderComponent = ({ dark, setDark }) => {
           <div className="d-flex bg-white">
             <Input size="large"
             className='header-input'
-            bordered={false}
+            variant={false}
             placeholder="Input search text"
             allowClear
           />

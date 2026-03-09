@@ -55,13 +55,26 @@ function LeftBarComponent() {
   ];
 
   return (
-    <div className='leftbar-wrapper py-4'>
+    <div className='leftbar-wrapper '>
       <div className="category">
-        <div className="title px-4">
+        <div className="title">
           Danh mục
         </div>
 
         {categories.map((item, index) => (
+          <div className="item px-4" key={index}>
+            <img src={item.img} alt={item.name} />
+            <span>{item.name}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="category">
+        <div className="title">
+          Tiện ích
+        </div>
+
+        {categories.slice(0,3).map((item, index) => (
           <div className="item px-4" key={index}>
             <img src={item.img} alt={item.name} />
             <span>{item.name}</span>

@@ -32,8 +32,8 @@ const DefaultComponent = ({ children }) => {
             <div className="container">
                 <Row gutter={[32, 24]} className='mt-4'>
                 <Col span={5}><LeftBarComponent /></Col>
-                <Col span={14} className='bg-danger'>{children}</Col>
-                <Col span={5} className=''></Col>
+                <Col span={19}>{children}</Col>
+                {/* <Col span={5}></Col> */}
             </Row>
             </div>
         </ConfigProvider>
