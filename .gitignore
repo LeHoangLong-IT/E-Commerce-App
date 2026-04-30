@@ -1,0 +1,7 @@
+# Node modules
+api/node_modules/
+client/node_modules/
+
+# Env
+api/.env
+client/.env

@@ -3,6 +3,7 @@ import { Col, Row, Input, Button } from 'antd';
 import './HeaderComponent.scss'
 import { ShoppingCart, MoonStar, Sun, User, Search } from 'lucide-react';
 import { useEffect } from 'react';
+import { Link } from "react-router";
 
 const HeaderComponent = ({ dark, setDark }) => {
 
@@ -16,7 +17,9 @@ const HeaderComponent = ({ dark, setDark }) => {
       <Row className='header-wrapper' gutter={[48, 0]} align="middle">
         <Col flex="none">
           <div className="d-flex align-items-center justify-content-between gap-5">
-            <h1 className='header-logo'>I-Shop</h1>
+            <Link to="/">
+              <h1 className='header-logo'>I-Shop</h1>
+            </Link>
             {/* <MoonStar /> */}
             {dark
               ? (<Sun onClick={() => setDark(false)} />)
@@ -27,12 +30,12 @@ const HeaderComponent = ({ dark, setDark }) => {
         <Col flex="auto">
           <div className="d-flex bg-white">
             <Input size="large"
-            className='header-input'
-            variant={false}
-            placeholder="Input search text"
-            allowClear
-          />
-          <Button size="large" className='header-button' icon={<Search size={16}/>}>Tìm kiếm</Button>
+              className='header-input'
+              variant={false}
+              placeholder="Input search text"
+              allowClear
+            />
+            <Button size="large" className='header-button' icon={<Search size={16} />}>Tìm kiếm</Button>
           </div>
         </Col>
         <Col flex="none">
