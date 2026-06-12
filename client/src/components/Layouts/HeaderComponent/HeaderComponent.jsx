@@ -47,6 +47,12 @@ const HeaderComponent = ({ dark, setDark }) => {
             </div> */}
 
             <div className="header-userinfo d-flex position-relative gap-3 py-3 fs-3">
+              <Link to="/" className='text-white text-decoration-none'>
+                <User /> Đăng nhập
+              </Link>
+            </div>
+
+            <div className="header-userinfo d-flex position-relative gap-3 py-3 fs-3">
               <User /> Hoàng Long
 
               <div className="userinfo-container">
