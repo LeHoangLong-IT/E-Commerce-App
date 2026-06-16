@@ -1,0 +1,27 @@
+.product-card {
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--borderColor);
+    transition: all .2s ease;
+    background: var(--whiteBox);
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    border-color: #91caff;
+}
+
+.product-card .ant-card-cover img {
+    width: 100%;
+    display: block;
+}
+
+.product-card .ant-card-actions {
+    background: var(--bgSoft);
+    border-top: 1px solid var(--borderColor);
+}
+
+.product-card .ant-rate-star {
+    margin-inline-end: 2px;
+}

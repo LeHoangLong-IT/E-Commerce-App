@@ -1,0 +1,25 @@
+.productDetailWrapper {
+  background-color: var(--bgPage);
+  padding: 16px 0 32px;
+  font-family: Inter, Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.breadcrumb {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.whiteBox {
+  background-color: var(--whiteBox);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* Specific component styles will be added here or inline */

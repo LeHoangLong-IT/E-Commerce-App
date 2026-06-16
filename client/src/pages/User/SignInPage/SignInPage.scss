@@ -1,0 +1,49 @@
+.sign-in-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bgPage);
+    padding: 20px;
+}
+
+.sign-in-card {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    .ant-card-body {
+        padding: 32px;
+    }
+}
+
+.sign-in-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.sign-in-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sign-in-footer {
+    text-align: center;
+}
+
+.dev-login-group {
+    margin-bottom: 24px;
+    padding: 16px;
+    border-radius: 10px;
+    background: var(--bgSoft);
+    border: 1px dashed var(--borderColor);
+}
+
+.dev-login-title {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
