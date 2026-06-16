@@ -20,9 +20,13 @@ function App() {
             return (
               <Route
                 key={route.path} path={route.path} element={
-                  <Layout>
+                  Layout === Fragment ? (
                     <Page />
-                  </Layout>
+                  ) : (
+                    <Layout hideSidebar={route.hideSidebar}>
+                      <Page />
+                    </Layout>
+                  )
                 } />
             )
           })}

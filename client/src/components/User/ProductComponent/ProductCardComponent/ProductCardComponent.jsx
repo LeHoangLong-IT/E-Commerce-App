@@ -2,12 +2,20 @@ import {
     Card,
     Tag,
     Rate,
-    Progress
+    Progress,
+    notification,
+    Modal,
+    Button
 } from "antd";
+
+import { useState } from "react";
+
+import cartApi from "../../../../api/cartApi";
 
 import {
     ShoppingCartOutlined,
-    ThunderboltOutlined
+    EyeOutlined,
+    CheckCircleFilled
 } from "@ant-design/icons";
 
 import { useNavigate } from "react-router-dom";
@@ -16,6 +24,7 @@ import "./ProductCardComponent.scss"
 const ProductCardComponent = ({ product }) => {
 
     const navigate = useNavigate();
+    const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
 
     const price = Number(product.price || 0);
     const salePrice = Number(product.sale_price || 0);
@@ -27,7 +36,53 @@ const ProductCardComponent = ({ product }) => {
             )
             : 0;
 
-
+    const handleAddToCart = async (e) => {
+        e.stopPropagation();
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                notification.warning({ message: 'Vui lòng đăng nhập để thêm vào giỏ hàng' });
+                navigate('/sign-in');
+                return;
+            }
+            const res = await cartApi.addToCart({
+                productId: product.id,
+                quantity: 1
+            });
+            if (res.status === 'OK') {
+                notification.open({ 
+                    message: (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#52c41a' }}>
+                                <CheckCircleFilled style={{ fontSize: '20px' }} />
+                                <span style={{ fontSize: '16px', fontWeight: 600, color: '#333' }}>Thêm vào giỏ hàng thành công</span>
+                            </div>
+                            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                                <img src={product.image} alt={product.name} style={{ width: '64px', height: '64px', objectFit: 'cover', borderRadius: '6px', border: '1px solid #f0f0f0', flexShrink: 0 }} />
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                    <div style={{ fontSize: '14px', fontWeight: 500, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                        {product.name}
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
+                                        <span style={{ fontSize: '13px', color: '#888' }}>x1</span>
+                                        <span style={{ color: '#ee4d2d', fontWeight: 'bold', fontSize: '16px' }}>
+                                            {salePrice.toLocaleString("vi-VN")}₫
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ),
+                    duration: 3,
+                    style: { width: 380, padding: '16px' }
+                });
+            } else {
+                notification.error({ message: res.message || 'Có lỗi xảy ra' });
+            }
+        } catch (error) {
+            notification.error({ message: error.response?.data?.message || 'Có lỗi xảy ra' });
+        }
+    };
 
     return (
         <Card
@@ -79,9 +134,7 @@ const ProductCardComponent = ({ product }) => {
             }
             actions={[
                 <span
-                    onClick={(e) => {
-                        e.stopPropagation();
-                    }}
+                    onClick={handleAddToCart}
                 >
                     <ShoppingCartOutlined />
                 </span>,
@@ -89,9 +142,10 @@ const ProductCardComponent = ({ product }) => {
                 <span
                     onClick={(e) => {
                         e.stopPropagation();
+                        setIsQuickViewOpen(true);
                     }}
                 >
-                    <ThunderboltOutlined />
+                    <EyeOutlined />
                 </span>
             ]}
         >
@@ -208,6 +262,50 @@ const ProductCardComponent = ({ product }) => {
             >
                 Còn {product.count_in_stock} sản phẩm
             </div>
+
+            <Modal
+                title="Xem Nhanh Sản Phẩm"
+                open={isQuickViewOpen}
+                onCancel={(e) => {
+                    e.stopPropagation();
+                    setIsQuickViewOpen(false);
+                }}
+                footer={null}
+                centered
+                width={600}
+            >
+                <div style={{ display: 'flex', gap: '20px' }}>
+                    <img src={product.image} alt={product.name} style={{ width: '200px', height: '200px', objectFit: 'cover', borderRadius: '8px' }} />
+                    <div style={{ flex: 1 }}>
+                        <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>{product.name}</h3>
+                        <div style={{ marginBottom: '8px' }}>
+                            <Tag color="blue">{product.primary_category?.name}</Tag>
+                            <Rate disabled allowHalf value={Number(product.rating)} style={{ fontSize: 12, marginLeft: '8px' }} />
+                        </div>
+                        <div style={{ color: '#ff424e', fontSize: '24px', fontWeight: 'bold', margin: '10px 0' }}>
+                            {salePrice.toLocaleString("vi-VN")}₫
+                        </div>
+                        <p style={{ color: 'var(--textSecondary)', marginBottom: '8px' }}>
+                            Đã bán {product.sold} | Còn {product.count_in_stock} sản phẩm
+                        </p>
+                        {product.description && (
+                            <p style={{ 
+                                fontSize: '13px', 
+                                color: '#666', 
+                                display: '-webkit-box', 
+                                WebkitLineClamp: 2, 
+                                WebkitBoxOrient: 'vertical', 
+                                overflow: 'hidden' 
+                            }}>
+                                {product.description.replace(/(<([^>]+)>)/gi, "")}
+                            </p>
+                        )}
+                        <Button type="primary" danger onClick={handleAddToCart} style={{ marginTop: '15px', height: '40px', width: '100%', fontSize: '16px' }}>
+                            Thêm vào giỏ hàng
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
         </Card>
     );
 };

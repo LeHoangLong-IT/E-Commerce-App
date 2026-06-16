@@ -12,9 +12,14 @@ model users {
   name       String   @db.VarChar(255)
   email      String   @unique @db.VarChar(255)
   password   String   @db.VarChar(255)
-  role       String   @default("user") @db.VarChar(255)
-  created_at DateTime @default(now()) @db.Timestamp(6)
-  updated_at DateTime @default(now()) @db.Timestamp(6)
+  role          String    @default("user") @db.VarChar(255)
+  phone         String?   @db.VarChar(20)
+  address       String?   @db.Text
+  avatar        String?   @db.Text
+  gender        String?   @db.VarChar(10)
+  date_of_birth DateTime? @db.Date
+  created_at    DateTime  @default(now()) @db.Timestamp(6)
+  updated_at    DateTime  @default(now()) @db.Timestamp(6)
 
   cart    cart?
   orders  order[]

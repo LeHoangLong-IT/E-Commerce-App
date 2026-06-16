@@ -76,16 +76,22 @@ const HeaderComponent = ({ dark, setDark }) => {
 
                 <div className="userinfo-container">
 
+                  {user.role === 'admin' && (
+                    <div className="userinfo-item" onClick={() => navigate('/admin')}>
+                      Quản trị viên
+                    </div>
+                  )}
+
                   <div className="userinfo-item">
                     Thông tin tài khoản
                   </div>
 
-                  <div className="userinfo-item">
+                  <div className="userinfo-item" onClick={() => navigate('/cart')}>
                     Giỏ hàng
                   </div>
 
-                  <div className="userinfo-item">
-                    Lịch sử mua hàng
+                  <div className="userinfo-item" onClick={() => navigate('/my-orders')}>
+                    Lịch sử đơn hàng
                   </div>
 
                   <div
@@ -100,7 +106,7 @@ const HeaderComponent = ({ dark, setDark }) => {
             )}
 
             {/* CART */}
-            <div className="d-flex gap-2 gap-md-3 py-3 fs-5 fs-md-3">
+            <div className="d-flex gap-2 gap-md-3 py-3 fs-5 fs-md-3" style={{cursor: 'pointer'}} onClick={() => navigate('/cart')}>
               <ShoppingCart /> <span className="d-none d-sm-inline">Giỏ hàng</span>
             </div>
 
