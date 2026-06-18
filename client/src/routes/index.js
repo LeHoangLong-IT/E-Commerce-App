@@ -16,6 +16,7 @@ import SignUpPage from "../pages/User/SignUpPage/SignUpPage";
 import CartPage from "../pages/User/CartPage/CartPage";
 import CheckoutPage from "../pages/User/CheckoutPage/CheckoutPage";
 import TestUI from "../pages/TestUI";
+import ProfilePage from "../pages/User/ProfilePage/ProfilePage";
 
 export const routes = [
     {
@@ -40,6 +41,12 @@ export const routes = [
     {
         path: '/my-orders',
         page: OrderPage,
+        isShowHeader: true,
+        hideSidebar: true,
+    },
+    {
+        path: '/profile',
+        page: ProfilePage,
         isShowHeader: true,
         hideSidebar: true,
     },

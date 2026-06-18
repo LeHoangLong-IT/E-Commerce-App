@@ -80,7 +80,12 @@ exports.signIn = async ({ username, password }) => {
             id: user.id,
             name: user.name,
             email: user.email,
-            role: user.role
+            role: user.role,
+            phone: user.phone,
+            address: user.address,
+            avatar: user.avatar,
+            gender: user.gender,
+            date_of_birth: user.date_of_birth
         }
     };
 };

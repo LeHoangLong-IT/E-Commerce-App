@@ -82,7 +82,7 @@ const HeaderComponent = ({ dark, setDark }) => {
                     </div>
                   )}
 
-                  <div className="userinfo-item">
+                  <div className="userinfo-item" onClick={() => navigate('/profile')}>
                     Thông tin tài khoản
                   </div>
 

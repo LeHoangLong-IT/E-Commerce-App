@@ -35,6 +35,19 @@ const CheckoutPage = () => {
         fetchProvinces();
     }, []);
 
+    // Autofill user details
+    useEffect(() => {
+        const u = localStorage.getItem("user");
+        if (u) {
+            const userObj = JSON.parse(u);
+            form.setFieldsValue({
+                fullName: userObj.name,
+                phone: userObj.phone,
+                address: userObj.address
+            });
+        }
+    }, [form]);
+
     const fetchCartItems = async () => {
         try {
             setLoading(true);
